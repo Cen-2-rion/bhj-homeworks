@@ -5,16 +5,16 @@ const xhr = new XMLHttpRequest();
 xhr.addEventListener('readystatechange', (event) => {
     event.preventDefault();
 
-    const item = document.querySelector('.item');
-    const response = JSON.parse(xhr.responseText).response.Valute; // распарсиваем ответ
-
-    const loader = document.getElementById('loader');
-    loader.classList.remove('loader_active'); // отключаем загрузочный экран
+    if (xhr.readyState === xhr.DONE) {
+        
+        const item = document.querySelector('.item');
+        const response = JSON.parse(xhr.responseText).response.Valute; // распарсиваем ответ
+        
+        const loader = document.getElementById('loader');
+        loader.classList.remove('loader_active'); // отключаем загрузочный экран
 
 // по готовности проходимся циклом и находим необходимые значения
-    for (let elem in response) {
-    
-        if (xhr.readyState === xhr.DONE) {
+        for (let elem in response) {
             item.insertAdjacentHTML('afterEnd', `
             <div class="item">
                 <div class="item__code">
