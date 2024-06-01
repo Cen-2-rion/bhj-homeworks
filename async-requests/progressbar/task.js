@@ -8,13 +8,13 @@ form.addEventListener('submit', (event) => {
 
     const xhr = new XMLHttpRequest(); // создаём объект запроса
     
-// обрабатываем ответ сервера
+    // обрабатываем ответ сервера
     xhr.upload.addEventListener('progress', (event) => {
         const percentage = Math.round((event.loaded / event.total) * 100);
         progress.value = percentage;
     });
 
-// отправляем форму
+    // отправляем форму
     const formData = new FormData(form);
     xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/upload');
     xhr.send(formData);
