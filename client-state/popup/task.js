@@ -2,7 +2,7 @@
 const modal = document.getElementById('subscribe-modal');
 const modalClose = document.querySelector('.modal__close');
 
- // если модальное окно отсутствует, то показываем его
+// если модальное окно отсутствует, то показываем его
 if (!modal.classList.contains('modal_active')) {
     modal.classList.add('modal_active');
 }
@@ -14,8 +14,4 @@ modalClose.addEventListener('click', () => {
 });
 
 // если в куке нет информации о закрытии страницы, то показываем окно, иначе скрываем окно
-if (document.cookie.indexOf('modal_close') === -1) {
-    modal.classList.add('modal_active');
-} else {
-    modal.classList.remove('modal_active');
-}
+document.cookie.indexOf('modal_close') === -1 ? modal.classList.add('modal_active') : modal.classList.remove('modal_active');
