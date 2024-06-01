@@ -13,7 +13,7 @@ xhr.addEventListener('readystatechange', (event) => {
         
         pollTitle.textContent = response.data.title;
 
-// перебираем вопросы в запросе и вставляем в DOM дерево
+        // перебираем вопросы в запросе и вставляем в DOM дерево
         for (let answer of response.data.answers) {
             pollAnswers.insertAdjacentHTML('afterBegin', `
             <button class="poll__answer">
@@ -23,7 +23,7 @@ xhr.addEventListener('readystatechange', (event) => {
         }
     }
 
-// перебираем кнопки и вешаем обработчик
+    // перебираем кнопки и вешаем обработчик
     document.querySelectorAll('.poll__answer').forEach(button => {
         button.addEventListener('click', () => {
             alert('«Спасибо, ваш голос засчитан!»');
