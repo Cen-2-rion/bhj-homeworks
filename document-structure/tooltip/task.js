@@ -8,11 +8,11 @@ hasTooltip.forEach(elem => {
     elem.addEventListener('click', (event) => {
         event.preventDefault();
 
-// находим координаты элемента
+        // находим координаты элемента
         let posElem = elem.getBoundingClientRect();
         const bottom = `left:${posElem.left + 'px'}; top:${posElem.top + 20 + 'px'}`;
 
-// сравниваем текст подсказки с текстом элемента
+        // сравниваем текст подсказки с текстом элемента
         if (toolTip.textContent !== elem.title) {
             elem.insertAdjacentElement('afterEnd', toolTip); // добавляем div с подсказкой в конец элемента
             toolTip.classList.add('tooltip_active'); // добавляем класс для анимации
@@ -20,6 +20,18 @@ hasTooltip.forEach(elem => {
             toolTip.style.cssText = bottom; // добавляем координаты подсказки
         } else {
             toolTip.classList.toggle('tooltip_active');
-        };
+        }
+    });
+});
+
+// скрываем подсказку при скролле
+window.addEventListener('scroll', () => {
+    toolTip.classList.remove('tooltip_active');
+});
+
+// скрываем подсказку при наведении на другой элемент
+hasTooltip.forEach(elem => {
+    elem.addEventListener('mouseenter', () => {
+        toolTip.classList.remove('tooltip_active');
     });
 });
