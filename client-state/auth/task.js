@@ -1,41 +1,34 @@
 // находим необходимые элементы
 const form = document.getElementById('signin__form');
 const welcome = document.getElementById('welcome');
-const userId = document.getElementById('user_id');
 const button = document.getElementById('signin__btn');
 const control = document.querySelectorAll('.control');
 const title = document.querySelector('.title');
 
 // проверяем наличие id пользователя в локальном хранилище
- if (localStorage.id) {
-    onLoggedIn();
- } else {
-    onLoggedOut();
- }
+ if (localStorage.id) onLoggedIn();
 
 // обрабатываем событие отправки формы
  form.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const xhr = new XMLHttpRequest(); // создаём объект запроса
-
+    
     // обрабатываем ответ сервера
-    xhr.addEventListener('readystatechange', () => {
+    xhr.addEventListener('load', () => {
 
-        if (xhr.readyState === xhr.DONE) {
-            const response = JSON.parse(xhr.responseText); // распарсиваем ответ
+        const response = JSON.parse(xhr.responseText); // распарсиваем ответ
 
-            if (response.success === true) {
-                localStorage.id = response.user_id; // записываем id пользователя в локальное хранилище
-                onLoggedIn();
-            } else if (button.textContent === 'Выйти') {
-                    localStorage.removeItem('id'); // удаляем id пользователя из локального хранилища
-                    onLoggedOut();
-            } else {
-                alert('Неверный логин/пароль'); // выводим сообщение об ошибке
-            }
-            form.reset(); // очищаем форму
+        if (response.success === true) {
+            localStorage.id = response.user_id; // записываем id пользователя в локальное хранилище
+            onLoggedIn();
+        } else if (button.textContent === 'Выйти') {
+            localStorage.removeItem('id'); // удаляем id пользователя из локального хранилища
+            onLoggedOut();
+        } else {
+            alert('Неверный логин/пароль'); // выводим сообщение об ошибке
         }
+        form.reset(); // очищаем форму
     });
 
     // отправляем форму
